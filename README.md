@@ -8,3 +8,4 @@ DROP SCHEMA IF EXISTS vbz;
 CREATE SCHEMA `vbz` DEFAULT CHARACTER SET utf8 ;
 USE vbz;
 ```
+test
