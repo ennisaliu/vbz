@@ -1,7 +1,7 @@
 # vbz
 Datenbank-Prüfung VBZ
 
---sql
+---sql
 DROP SCHEMA IF EXISTS vbz;
 -- In MySQL, the schema is the synonym for the database
 -- DROP DATABASE [IF EXISTS] database_name;
