@@ -8,4 +8,7 @@ DROP SCHEMA IF EXISTS vbz;
 CREATE SCHEMA `vbz` DEFAULT CHARACTER SET utf8 ;
 USE vbz;
 ```
-test
+
+Aufgabe 6 - Entity Relation Diagram
+
+![](https://github.com/ennisaliu/vbz/blob/master/ERM.png)  
