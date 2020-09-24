@@ -44,7 +44,8 @@ LIMIT 40000;
 
 ![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a7_fahrwegdatum.JPG)  
 
-Aufgabe 8a - Linien-Abfrage
+## Aufgabe 8 - Linien Tabelle
+### Aufgabe 8a - Linien-Abfrage
 ```sql
 SELECT DISTINCT
 	linie,
@@ -58,7 +59,7 @@ ORDER BY richtung;
 ```
 ![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a8a_linienabfrage.JPG)  
 
-Aufgabe 8b - Erstellen einer View
+### Aufgabe 8b - Erstellen einer View
 ```sql
 CREATE VIEW query_line AS
 SELECT DISTINCT
@@ -73,7 +74,7 @@ ORDER BY richtung;
 ```
 ![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a8b_view.JPG)  
 
-Aufgabe 8c - Neue Tabelle Linie mit Hilfe einer Abfrage
+### Aufgabe 8c - Neue Tabelle Linie mit Hilfe einer Abfrage
 ```sql
 CREATE TABLE linie (PRIMARY KEY (fahrweg_id)) AS
 SELECT DISTINCT
@@ -87,3 +88,5 @@ FROM
 WHERE linie = 2;
 ```
 ![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a8c_create_line_table.JPG)
+
+## Aufgabe 9 - Ankunftszeiten Tabelle
