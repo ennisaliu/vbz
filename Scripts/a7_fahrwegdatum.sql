@@ -19,7 +19,7 @@ SELECT
  datumzeit_ist_an_von,
  datumzeit_soll_ab_von,
  datumzeit_ist_ab_von,
- datum_nach,
+ datum__nach,
  TIMEDIFF (datumzeit_soll_an_von, datumzeit_ist_an_von) as timediff_an,
  TIMESTAMPDIFF (SECOND, datumzeit_soll_an_von, datumzeit_ist_an_von) as timediff_an_seconds,
  TIMEDIFF (datumzeit_soll_ab_von, datumzeit_ist_ab_von) as timediff_ab,
