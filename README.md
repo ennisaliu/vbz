@@ -122,7 +122,7 @@ LIMIT 20;
 
 ## Aufgabe 11 - Verspätungsliste pro Linie
 
-#CSV Export mit 20 grössten Verspätungen
+CSV Export mit 20 grössten Verspätungen
 
 |           |          |                                 |       |      | 
 |-----------|----------|---------------------------------|-------|------| 
@@ -148,10 +148,10 @@ LIMIT 20;
 | 47.385258 | 8.494672 | Zuerich Kappeli                 |       | 25   | 
 | 47.391377 | 8.478527 | Zuerich Farbhof                 |       | 24   | 
  
-#20 grösste Verspätungen Visualisierung in maps.co
+20 grösste Verspätungen Visualisierung in maps.co
 ![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a11_linie_mit_einer_fahrt.JPG)
 
-#CSV Export mit Linie einer Fahrt
+CSV Export mit Linie einer Fahrt
 
 | lat       | long     | name                            | color | delay |
 |-----------|----------|---------------------------------|-------|-------|
@@ -205,7 +205,10 @@ LIMIT 20;
 | 47.397915 | 8.448265 | Schlieren Zentrum/Bahnhof       |       | -44   |
 
 
-#Linie mit einer Fahrt Visualisierung in maps.co
+Linie mit einer Fahrt Visualisierung in maps.co
 
 ![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a11_linie_mit_20_groesssten_verspeatungen.png.JPG)
+
+##Aufgabe 12
+
 
