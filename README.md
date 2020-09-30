@@ -148,7 +148,7 @@ CSV Export 20 grössten Verspätungen
 | 47.385258 | 8.494672 | Zuerich Kappeli                 |       | 25   | 
 | 47.391377 | 8.478527 | Zuerich Farbhof                 |       | 24   | 
  
-20 grösste Verspätungen Visualisierung in maps.co
+Visualisierung der Linie für 20 grösste Verspätungen in maps.co
 ![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a11_linie_mit_20_groesssten_verspeatungen.png)
 
 CSV Export einer Fahrt
@@ -205,7 +205,7 @@ CSV Export einer Fahrt
 | 47.397915 | 8.448265 | Schlieren Zentrum/Bahnhof       |       | -44   |
 
 
-Linie mit einer Fahrt Visualisierung in maps.co
+Visualisierung der Linie mit einer Fahrt in maps.co
 
 ![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a11_linie_mit_einer_fahrt.JPG)
 
