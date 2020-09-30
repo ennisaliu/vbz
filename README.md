@@ -122,7 +122,7 @@ LIMIT 20;
 
 ## Aufgabe 11 - Verspätungsliste pro Linie
 
-CSV Export mit 20 grössten Verspätungen
+CSV Export 20 grössten Verspätungen
 
 |           |          |                                 |       |      | 
 |-----------|----------|---------------------------------|-------|------| 
@@ -149,9 +149,9 @@ CSV Export mit 20 grössten Verspätungen
 | 47.391377 | 8.478527 | Zuerich Farbhof                 |       | 24   | 
  
 20 grösste Verspätungen Visualisierung in maps.co
-![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a11_linie_mit_einer_fahrt.JPG)
+![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a11_linie_mit_20_groesssten_verspeatungen.png)
 
-CSV Export mit Linie einer Fahrt
+CSV Export einer Fahrt
 
 | lat       | long     | name                            | color | delay |
 |-----------|----------|---------------------------------|-------|-------|
@@ -207,8 +207,8 @@ CSV Export mit Linie einer Fahrt
 
 Linie mit einer Fahrt Visualisierung in maps.co
 
-![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a11_linie_mit_20_groesssten_verspeatungen.png.JPG)
+![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a11_linie_mit_einer_fahrt.JPG)
 
-##Aufgabe 12
+## Aufgabe 12
 
 
