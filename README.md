@@ -8,27 +8,27 @@ Datenbank-Prüfung VBZ
 ## Aufgabe 7 - Abfrage über Zeitdifferenzen 
 ```sql
 SELECT
- linie,
- richtung,
- fahrzeug,
- kurs,
- seq_von,
- halt_id_von,
- halt_id_nach,
- halt_punkt_id_von,
- halt_punkt_id_nach,
- fahrt_id,
- fahrweg_id,
- fw_no,
- fw_typ,
- fw_kurz,
- fw_lang,
- betriebs_datum,
- datumzeit_soll_an_von,
- datumzeit_ist_an_von,
- datumzeit_soll_ab_von,
- datumzeit_ist_ab_von, 
- datum__nach,
+ fsi.linie,
+ fsi.richtung,
+ fsi.fahrzeug,
+ fsi.kurs,
+ fsi.seq_von,
+ fsi.halt_id_von,
+ fsi.halt_id_nach,
+ fsi.halt_punkt_id_von,
+ fsi.halt_punkt_id_nach,
+ fsi.fahrt_id,
+ fsi.fahrweg_id,
+ fsi.fw_no,
+ fsi.fw_typ,
+ fsi.fw_kurz,
+ fsi.fw_lang,
+ fsi.betriebs_datum,
+ fsi.datumzeit_soll_an_von,
+ fsi.datumzeit_ist_an_von,
+ fsi.datumzeit_soll_ab_von,
+ fsi.datumzeit_ist_ab_von,
+ fsi.datum__nach,
  TIMEDIFF (datumzeit_soll_an_von, datumzeit_ist_an_von) as timediff_an,
  TIMESTAMPDIFF (SECOND, datumzeit_soll_an_von, datumzeit_ist_an_von) as timediff_an_seconds,
  TIMEDIFF (datumzeit_soll_ab_von, datumzeit_ist_ab_von) as timediff_ab,
@@ -36,7 +36,7 @@ SELECT
  TIMESTAMPDIFF (SECOND, datumzeit_soll_an_von, datumzeit_soll_ab_von) as halt_soll_time_seconds,
  TIMESTAMPDIFF (SECOND, datumzeit_ist_an_von, datumzeit_ist_ab_von) as halt_ist_time_seconds
 FROM
- fahrzeiten_soll_ist
+ fahrzeiten_soll_ist fsi
 WHERE linie = 2 AND fahrt_id = 1534 AND datum_nach = '29.12.19'
 ORDER BY datumzeit_soll_an_von ASC
 LIMIT 40000;
@@ -90,6 +90,62 @@ WHERE linie = 2;
 ![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a8c_create_line_table.JPG)
 
 ## Aufgabe 9 - Ankunftszeiten Tabelle
+
+zuerst Tabelle fahrzeiten_soll_ist mit datum_nach ergänzen
+
+```sql
+ALTER TABLE fahrzeiten_soll_ist ADD datumzeit_soll_nach_von DATETIME NULL;
+ALTER TABLE fahrzeiten_soll_ist ADD datumzeit_ist_an_nach DATETIME NULL;
+ALTER TABLE fahrzeiten_soll_ist ADD datumzeit_soll_ab_nach DATETIME NULL;
+ALTER TABLE fahrzeiten_soll_ist ADD datumzeit_ist_ab_nach DATETIME NULL;
+
+UPDATE fahrzeiten_soll_ist SET datumzeit_soll_an_nach = DATE_ADD(STR_TO_DATE(datum_nach
+,'%d.%m.%Y'), INTERVAL soll_an_nach SECOND);
+UPDATE fahrzeiten_soll_ist SET datumzeit_ist_an_nach = DATE_ADD(STR_TO_DATE(datum_nach
+,'%d.%m.%Y'), INTERVAL ist_an_nach1 SECOND);
+UPDATE fahrzeiten_soll_ist SET datumzeit_soll_ab_nach = DATE_ADD(STR_TO_DATE(datum_nach
+,'%d.%m.%Y'), INTERVAL soll_ab_nach SECOND);
+UPDATE fahrzeiten_soll_ist SET datumzeit_ist_ab_nach = DATE_ADD(STR_TO_DATE(datum_nach
+,'%d.%m.%Y'), INTERVAL ist_ab_nach SECOND);
+```
+
+sql```
+CREATE TABLE ankunftszeiten AS
+SELECT
+    fsi.halt_punkt_id_nach AS haltepukt_id, 
+    fsi.fahrweg_id,
+    fsi.fahrt_id,
+    fsi.datumzeit_ist_an_nach AS datumzeit_ist_an, 
+    fsi.datumzeit_soll_an_nach AS datumzeit_soll_an,
+    fsi.datumzeit_soll_ab_nach AS datumzeit_soll_ab,
+    timestampdiff(SECOND, datumzeit_soll_an_von, datumzeit_ist_an_von) AS delay
+FROM
+    vbzdat.fahrzeiten_soll_ist fsi
+WHERE fsi.linie = 2
+UNION
+SELECT
+    fsi.halt_punkt_id_nach,
+    fsi.fahrweg_id,
+    fsi.fahrt_id,
+    fsi.datumzeit_ist_an_von AS datumzeit_ist_an,
+    fsi.datumzeit_soll_an_von AS datumzeit_soll_an,
+    fsi.datumzeit_soll_ab_von AS datumzeit_soll_ab,
+    timestampdiff(SECOND, datumzeit_soll_an_von, datumzeit_ist_an_von) AS delay
+FROM
+    vbzdat.fahrzeiten_soll_ist fsi
+WHERE fsi.linie = 2
+AND fsi.seq_von = 1
+ORDER BY fahrt_id;
+
+ALTER TABLE ankunftszeiten ADD id int PRIMARY KEY AUTO_INCREMENT FIRST;
+```
+
+
+Foreign Keys hinzufügen
+```sql
+ALTER TABLE vbzdat.ankunftszeiten ADD CONSTRAINT ankunftszeiten_FK FOREIGN KEY (fahrweg_id) REFERENCES vbzdat.linie(fahrweg_id);
+ALTER TABLE vbzdat.ankunftszeiten ADD CONSTRAINT ankunftszeiten_FK_1 FOREIGN KEY (haltepukt_id) REFERENCES vbzdat.haltepunkt(halt_punkt_id);
+```
 
 ## Aufgabe 10 - Verspätungsliste pro Linie
 

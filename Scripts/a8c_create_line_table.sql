@@ -1,10 +1,9 @@
-CREATE TABLE linie (PRIMARY KEY (fahrweg_id)) AS
+CREATE TABLE linie (PRIMARY KEY (fahrweg_id))
 SELECT DISTINCT
-	linie,
-    richtung,
-    fw_no,
-    fw_lang
-    fahrweg_id
+	fsi.linie,
+    fsi.richtung,
+    fsi.fw_no,
+    fsi.fw_lang,
+    fsi.fahrweg_id
 FROM
-    vbzdat.fahrzeiten_soll_ist
-WHERE linie = 2;
+    vbzdat.fahrzeiten_soll_ist fsi;
