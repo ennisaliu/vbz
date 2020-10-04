@@ -109,7 +109,7 @@ UPDATE fahrzeiten_soll_ist SET datumzeit_ist_ab_nach = DATE_ADD(STR_TO_DATE(datu
 ,'%d.%m.%Y'), INTERVAL ist_ab_nach SECOND);
 ```
 
-sql```
+```sql
 CREATE TABLE ankunftszeiten AS
 SELECT
     fsi.halt_punkt_id_nach AS haltepukt_id, 
