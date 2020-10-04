@@ -283,4 +283,12 @@ Daten in Maps.co visualisiert
 ![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a11_graphische_visualisierung_einer_linie.png)
 ## Aufgabe 12
 
+## Aufgabe 13
+
+```sql
+SELECT h.GPS_Latitude, h.GPS_Longitude, SQRT(
+    POW(69.1 * (h.GPS_Latitude - [47.350614]), 2) +
+    POW(69.1 * ([8.560933] - h.GPS_Longitude) * COS(h.GPS_Latitude / 57.3), 2)) AS distance
+FROM vbzdat.haltepunkt HAVING distance < 25 ORDER BY distance;
+```
 
