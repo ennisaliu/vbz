@@ -109,6 +109,8 @@ UPDATE fahrzeiten_soll_ist SET datumzeit_ist_ab_nach = DATE_ADD(STR_TO_DATE(datu
 ,'%d.%m.%Y'), INTERVAL ist_ab_nach SECOND);
 ```
 
+Tabelle Ankunftszeiten erstellen
+
 ```sql
 CREATE TABLE ankunftszeiten AS
 SELECT
@@ -183,32 +185,31 @@ LIMIT 20;
 
 Folgende Daten werden exportiert:
 
-|                                   | 
-|-----------------------------------| 
-| "lat","lng","name","color","note" | 
-| 47.375541,8.517236,LOCH,"",1626   | 
-| 47.385258,8.494672,KAPP,"",1611   | 
-| 47.381336,8.50352,LETG,"",1610    | 
-| 47.376841,8.513689,ZYPR,"",1606   | 
-| 47.378388,8.510096,ALBP,"",1601   | 
-| 47.383281,8.499414,FREI,"",1597   | 
-| 47.374659,8.520793,KALK,"",996    | 
-| 47.37214,8.534878,SIHS,"",642     | 
-| 47.389226,8.482644,BACH,"",639    | 
-| 47.387938,8.485811,LIND,"",639    | 
-| 47.391377,8.478527,FARB,"",639    | 
-| 47.396117,8.466472,MULL,"",638    | 
-| 47.387075,8.489728,GRIM,"",636    | 
-| 47.393133,8.474336,MICA,"",631    | 
-| 47.397803,8.45996,GASO,"",630     | 
-| 47.398558,8.453973,WAGO,"",620    | 
-| 47.397915,8.448265,SCHL,"",619    | 
-| 47.369628,8.538333,PARA,"",614    | 
-| 47.398183,8.444296,SGEI,"",609    | 
-| 47.373593,8.530299,STAU,"",591    | 
+|lat      |lng     |name|color|note|
+|---------|--------|----|-----|----|
+|47.375541|8.517236|LOCH|     |1626|
+|47.385258|8.494672|KAPP|     |1611|
+|47.381336|8.50352 |LETG|     |1610|
+|47.376841|8.513689|ZYPR|     |1606|
+|47.378388|8.510096|ALBP|     |1601|
+|47.383281|8.499414|FREI|     |1597|
+|47.374659|8.520793|KALK|     |996 |
+|47.37214 |8.534878|SIHS|     |642 |
+|47.389226|8.482644|BACH|     |639 |
+|47.387938|8.485811|LIND|     |639 |
+|47.391377|8.478527|FARB|     |639 |
+|47.396117|8.466472|MULL|     |638 |
+|47.387075|8.489728|GRIM|     |636 |
+|47.393133|8.474336|MICA|     |631 |
+|47.397803|8.45996 |GASO|     |630 |
+|47.398558|8.453973|WAGO|     |620 |
+|47.397915|8.448265|SCHL|     |619 |
+|47.369628|8.538333|PARA|     |614 |
+|47.398183|8.444296|SGEI|     |609 |
+|47.373593|8.530299|STAU|     |591 |
 
-
-![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a10_20_groesste_verspaetungen.JPG)
+Daten in Maps.co visualisiert
+![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a10_20_groesste_verspätungen_linie_2.png)
 
 ## Aufgabe 11 - Verspätungsliste pro Linie
 
