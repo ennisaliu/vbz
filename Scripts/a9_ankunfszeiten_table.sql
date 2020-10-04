@@ -1,6 +1,6 @@
 CREATE TABLE ankunftszeiten AS
 SELECT
-    fsi.halt_punkt_id_nach AS haltepukt_id, 
+    fsi.halt_punkt_id_nach AS haltepunkt_id, 
     fsi.fahrweg_id,
     fsi.fahrt_id,
     fsi.datumzeit_ist_an_nach AS datumzeit_ist_an, 
