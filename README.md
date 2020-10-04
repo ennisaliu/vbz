@@ -140,7 +140,6 @@ ORDER BY fahrt_id;
 ALTER TABLE ankunftszeiten ADD id int PRIMARY KEY AUTO_INCREMENT FIRST;
 ```
 
-
 Foreign Keys hinzufügen
 ```sql
 ALTER TABLE vbzdat.ankunftszeiten ADD CONSTRAINT ankunftszeiten_FK FOREIGN KEY (fahrweg_id) REFERENCES vbzdat.linie(fahrweg_id);
@@ -151,28 +150,61 @@ ALTER TABLE vbzdat.ankunftszeiten ADD CONSTRAINT ankunftszeiten_FK_1 FOREIGN KEY
 
 Query zur Ermittlung der 20 grössten Verspätungen
 ```sql
-SELECT
-    fsi.id,
-    fsi.halt_punkt_id_von AS haltepunkt_id,
-    h2.halt_lang,
-    h.GPS_Latitude,
-    h.GPS_Longitude,
-    fsi.fahrweg_id,
-    fsi.linie,
-    fsi.datumzeit_ist_an_von AS datumzeit_ist_an, 
-    fsi.datumzeit_soll_an_von AS datumzeit_soll_an,
-    timestampdiff(SECOND, datumzeit_soll_an_von, datumzeit_ist_an_von) AS delay
-FROM
-    vbzdat.fahrzeiten_soll_ist fsi
-INNER JOIN vbzdat.haltepunkt h ON
-    fsi.halt_punkt_id_von = h.halt_punkt_id
-INNER JOIN vbzdat.haltestelle h2 ON
-    h.halt_id = h2.halt_id
-WHERE linie = 2
-GROUP BY halt_lang
+SELECT * FROM vbzdat.haltepunkt h
+LEFT JOIN (SELECT l.linie, a.haltepunkt_id, a.datumzeit_ist_an, a.datumzeit_soll_an, MAX(delay) as Verspätung
+FROM vbzdat.ankunftszeiten a 
+LEFT JOIN vbzdat.linie l ON
+    a.fahrweg_id = l.fahrweg_id
+GROUP BY haltepunkt_id) a ON h.halt_punkt_id = haltepunkt_id 
+LEFT JOIN vbzdat.haltestelle h2 ON
+h.halt_id = h2.halt_id
+ORDER BY Verspätung DESC
+LIMIT 20;
+```
+
+Query für csv Export nach Vorgaben
+
+```sql
+SELECT h.GPS_Latitude AS lat, h.GPS_Longitude AS lng, h2.halt_kurz AS name, '' AS color, a.delay AS notes FROM vbzdat.haltepunkt h
+LEFT JOIN (SELECT l.linie, a.id, a.fahrweg_id, a.haltepunkt_id, a.datumzeit_ist_an, a.datumzeit_soll_an, MAX(delay) as delay
+FROM vbzdat.ankunftszeiten a 
+LEFT JOIN vbzdat.linie l ON
+    a.fahrweg_id = l.fahrweg_id
+GROUP BY haltepunkt_id) a ON h.halt_punkt_id = haltepunkt_id 
+LEFT JOIN vbzdat.haltestelle h2 ON
+h.halt_id = h2.halt_id
+LEFT JOIN vbzdat.linie l ON
+a.fahrweg_id = l.fahrweg_id
 ORDER BY delay DESC
 LIMIT 20;
 ```
+
+Folgende Daten werden exportiert:
+
+|                                   | 
+|-----------------------------------| 
+| "lat","lng","name","color","note" | 
+| 47.375541,8.517236,LOCH,"",1626   | 
+| 47.385258,8.494672,KAPP,"",1611   | 
+| 47.381336,8.50352,LETG,"",1610    | 
+| 47.376841,8.513689,ZYPR,"",1606   | 
+| 47.378388,8.510096,ALBP,"",1601   | 
+| 47.383281,8.499414,FREI,"",1597   | 
+| 47.374659,8.520793,KALK,"",996    | 
+| 47.37214,8.534878,SIHS,"",642     | 
+| 47.389226,8.482644,BACH,"",639    | 
+| 47.387938,8.485811,LIND,"",639    | 
+| 47.391377,8.478527,FARB,"",639    | 
+| 47.396117,8.466472,MULL,"",638    | 
+| 47.387075,8.489728,GRIM,"",636    | 
+| 47.393133,8.474336,MICA,"",631    | 
+| 47.397803,8.45996,GASO,"",630     | 
+| 47.398558,8.453973,WAGO,"",620    | 
+| 47.397915,8.448265,SCHL,"",619    | 
+| 47.369628,8.538333,PARA,"",614    | 
+| 47.398183,8.444296,SGEI,"",609    | 
+| 47.373593,8.530299,STAU,"",591    | 
+
 
 ![](https://github.com/ennisaliu/vbz/blob/master/Screenshots/a10_20_groesste_verspaetungen.JPG)
 
